@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AllDaysHolidays — Loty, hotele, pakiety i inspiracje</title>
+  <meta name="description" content="AllDaysHolidays — koncept strony i aplikacji podróżniczej z rekomendacjami kierunków, kontem użytkownika, paszportem podróży i czatem AI." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="AllDaysHolidays">
+      <img src="assets/logo.png" alt="AllDaysHolidays" />
+    </a>
+
+    <nav class="nav" aria-label="Nawigacja">
+      <a href="#search">Szukaj</a>
+      <a href="#recommender">Gdzie lecieć?</a>
+      <a href="#destinations">Kierunki</a>
+      <a href="#passport">Paszport</a>
+      <a href="#contact">Kontakt</a>
+    </nav>
+
+    <div class="top-actions">
+      <button class="outline-btn small" id="openLoginBtn" type="button">Zaloguj</button>
+
+      <div class="account" id="accountBox">
+        <button class="avatar-btn" id="avatarBtn" type="button" aria-label="Panel użytkownika">
+          <span id="avatarInitials">AD</span>
+        </button>
+        <div class="account-panel" id="accountPanel">
+          <strong id="accountName">Użytkownik</strong>
+          <small id="accountEmail">konto demo</small>
+          <div class="mini-stats">
+            <span><b id="miniCountries">0</b> krajów</span>
+            <span><b id="miniTrips">0</b> wyjazdów</span>
+          </div>
+          <a href="#passport">Mój paszport podróży</a>
+          <button id="logoutBtn" type="button">Wyloguj</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">Loty · Hotele · Pakiety · Inspiracje</p>
+        <h1>Wakacje dobrane pod Ciebie, a nie kolejna lista 1000 ofert.</h1>
+        <p class="lead">
+          AllDaysHolidays łączy wyszukiwarkę ofert z rekomendacjami kierunków:
+          kiedy lecieć, gdzie nie przepłacić i co robić na miejscu.
+        </p>
+
+        <div class="hero-actions">
+          <a class="primary-btn" href="#recommender">Dobierz kierunek</a>
+          <a class="ghost-btn" href="#destinations">Zobacz polecajki</a>
+        </div>
+
+        <div class="trust-row" aria-label="Najważniejsze funkcje">
+          <span>🌤️ najlepszy miesiąc</span>
+          <span>💸 budżet</span>
+          <span>📍 plan na miejscu</span>
+          <span>⚠️ czego unikać</span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="phone">
+          <div class="speaker"></div>
+          <div class="app-top">
+            <img src="assets/app-icon.png" alt="" />
+            <span>alldaysholidays</span>
+            <button aria-label="Menu">☰</button>
+          </div>
+
+          <div class="phone-banner">
+            <p>Najlepszy wybór teraz</p>
+            <strong>Malta we wrześniu</strong>
+            <small>ciepło · taniej niż w lipcu · dobre loty</small>
+          </div>
+
+          <div class="phone-tabs">
+            <span>✈️ Loty</span>
+            <span>🏨 Hotel</span>
+            <span>🧳 Pakiet</span>
+            <span>💡 AI</span>
+          </div>
+
+          <div class="phone-card">
+            <div class="card-img"></div>
+            <div>
+              <b>Malaga, Hiszpania</b>
+              <small>7 dni · lot + hotel</small>
+            </div>
+            <strong>od 999 zł</strong>
+          </div>
+
+          <div class="phone-score">
+            <div>
+              <small>Twój paszport</small>
+              <b><span id="phoneCountryCount">7</span> krajów</b>
+            </div>
+            <span>🌍</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="search-box" id="search">
+      <div class="section-head compact">
+        <p class="kicker">Wyszukiwarka MVP</p>
+        <h2>Wybierz typ wyjazdu</h2>
+      </div>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-mode="loty" type="button">✈️ Loty</button>
+        <button class="tab" data-mode="hotele" type="button">🏨 Hotele</button>
+        <button class="tab" data-mode="pakiet" type="button">🧳 Pakiet</button>
+        <button class="tab" data-mode="inspiracje" type="button">💡 Inspiracje</button>
+      </div>
+
+      <form class="search-form">
+        <label>Skąd
+          <input value="Warszawa" />
+        </label>
+        <label>Dokąd
+          <input placeholder="np. Malta, Malaga, Kreta" />
+        </label>
+        <label>Termin
+          <input type="month" />
+        </label>
+        <label>Budżet
+          <select>
+            <option>do 1500 zł</option>
+            <option>1500–2500 zł</option>
+            <option>2500–4000 zł</option>
+            <option>4000 zł+</option>
+          </select>
+        </label>
+        <button class="primary-btn" type="button">Szukaj</button>
+      </form>
+
+      <p class="mode-copy" id="modeCopy">Loty: szybkie propozycje najtańszych kierunków i terminów.</p>
+    </section>
+
+    <section class="recommender" id="recommender">
+      <div class="section-head">
+        <p class="kicker">Najmocniejsza funkcja</p>
+        <h2>AI dobierze, gdzie najlepiej lecieć.</h2>
+        <p>
+          To jest demo logiki na froncie. W prawdziwej wersji można podpiąć API lotów,
+          hoteli, pogodę, ceny i realny model AI.
+        </p>
+      </div>
+
+      <div class="reco-layout">
+        <form class="reco-panel" id="recoForm">
+          <label>Budżet na osobę
+            <select id="budgetInput">
+              <option value="low">do 1500 zł</option>
+              <option value="mid" selected>1500–3000 zł</option>
+              <option value="high">3000–5000 zł</option>
+              <option value="premium">5000 zł+</option>
+            </select>
+          </label>
+
+          <label>Miesiąc
+            <select id="monthInput">
+              <option>Styczeń</option>
+              <option>Luty</option>
+              <option>Marzec</option>
+              <option>Kwiecień</option>
+              <option>Maj</option>
+              <option selected>Czerwiec</option>
+              <option>Lipiec</option>
+              <option>Sierpień</option>
+              <option>Wrzesień</option>
+              <option>Październik</option>
+              <option>Listopad</option>
+              <option>Grudzień</option>
+            </select>
+          </label>
+
+          <label>Klimat wyjazdu
+            <select id="vibeInput">
+              <option value="beach">Plaża i ciepło</option>
+              <option value="city">Zwiedzanie / city break</option>
+              <option value="party">Imprezy</option>
+              <option value="couple">Dla pary</option>
+              <option value="cheap">Jak najtaniej</option>
+            </select>
+          </label>
+
+          <label>Długość wyjazdu
+            <select id="daysInput">
+              <option value="3">3–4 dni</option>
+              <option value="5" selected>5–6 dni</option>
+              <option value="7">7 dni+</option>
+            </select>
+          </label>
+
+          <button class="primary-btn" type="submit">Pokaż kierunki</button>
+        </form>
+
+        <div class="reco-results" id="recoResults" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="destinations" id="destinations">
+      <div class="section-head">
+        <p class="kicker">Polecajki</p>
+        <h2>Gdzie lecieć i kiedy to ma sens?</h2>
+        <p>Każdy kierunek ma plusy, minusy i najlepszy okres. To robi większą wartość niż sama lista hoteli.</p>
+      </div>
+
+      <div class="destination-grid" id="destinationGrid"></div>
+    </section>
+
+    <section class="compare">
+      <div class="section-head compact">
+        <p class="kicker">Szybka decyzja</p>
+        <h2>Malta vs Malaga vs Kreta</h2>
+      </div>
+
+      <div class="compare-table">
+        <div class="row head">
+          <span>Kryterium</span>
+          <span>Malta</span>
+          <span>Malaga</span>
+          <span>Kreta</span>
+        </div>
+        <div class="row">
+          <span>Najlepsza pora</span>
+          <span>maj / wrzesień</span>
+          <span>kwiecień–czerwiec</span>
+          <span>czerwiec / wrzesień</span>
+        </div>
+        <div class="row">
+          <span>Najlepsze dla</span>
+          <span>city break + plaża</span>
+          <span>miasto + jedzenie</span>
+          <span>plaże + hotel</span>
+        </div>
+        <div class="row">
+          <span>Uwaga</span>
+          <span>mało zieleni</span>
+          <span>drożej w sezonie</span>
+          <span>auto się przydaje</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="passport" id="passport">
+      <div class="passport-copy">
+        <p class="kicker">Konto użytkownika</p>
+        <h2>Paszport podróży: kraje, miasta i odznaki.</h2>
+        <p>
+          To dodaje aplikacji powód do powrotu. Użytkownik może zbierać odwiedzone kraje,
+          planowane wyjazdy i odznaki typu „City Breaker”, „Beach Hunter”, „10 krajów”.
+        </p>
+        <button class="primary-btn" id="openLoginBtn2" type="button">Utwórz konto demo</button>
+      </div>
+
+      <div class="passport-card">
+        <div class="passport-top">
+          <div>
+            <small>AllDays Passport</small>
+            <strong id="passportName">Gość</strong>
+          </div>
+          <span>🌍</span>
+        </div>
+
+        <div class="stats">
+          <div><b id="countriesCount">7</b><small>krajów</small></div>
+          <div><b id="citiesCount">18</b><small>miast</small></div>
+          <div><b id="tripsCount">11</b><small>wyjazdów</small></div>
+        </div>
+
+        <div class="progress">
+          <div><span>Poziom Explorer</span><b id="progressText">42%</b></div>
+          <i><em id="progressBar"></em></i>
+        </div>
+
+        <div class="badges">
+          <span>🏖️ Beach Hunter</span>
+          <span>✈️ First Flight</span>
+          <span>🌆 City Breaker</span>
+        </div>
+
+        <form class="country-form" id="countryForm">
+          <input id="countryInput" placeholder="Dodaj kraj, np. Portugalia" />
+          <button type="submit">Dodaj</button>
+        </form>
+
+        <div class="chips" id="countryChips"></div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div>
+        <p class="kicker">Lead / zapytanie</p>
+        <h2>Zostaw zapytanie o ofertę.</h2>
+        <p>Na MVP nie musisz mieć płatności. Wystarczy zbierać zapytania i ręcznie odsyłać najlepszą propozycję.</p>
+      </div>
+      <form class="contact-form">
+        <input placeholder="Imię" />
+        <input type="email" placeholder="E-mail" />
+        <textarea placeholder="Budżet, termin, liczba osób, klimat wyjazdu"></textarea>
+        <button class="primary-btn" type="button">Wyślij zapytanie</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="modal" id="loginModal" aria-hidden="true">
+    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <button class="modal-close" id="closeLoginBtn" type="button">×</button>
+      <img src="assets/app-icon.png" alt="" />
+      <h2 id="loginTitle">Konto AllDaysHolidays</h2>
+      <p>Demo logowania. Dane zapisują się tylko w tej przeglądarce.</p>
+      <form id="loginForm">
+        <label>Imię
+          <input id="loginName" required placeholder="np. Kamil" />
+        </label>
+        <label>E-mail
+          <input id="loginEmail" type="email" required placeholder="twoj@email.pl" />
+        </label>
+        <button class="primary-btn" type="submit">Zaloguj</button>
+      </form>
+    </div>
+  </div>
+
+  <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Otwórz Holiday AI">
+    <span>AI</span>
+  </button>
+
+  <aside class="chat" id="chatWidget" aria-label="Holiday AI">
+    <header>
+      <div>
+        <strong>Holiday AI</strong>
+        <small>Dobór kierunku i planu</small>
+      </div>
+      <button id="closeChatBtn" type="button">×</button>
+    </header>
+    <div class="messages" id="messages">
+      <p class="bot">Podaj budżet, miesiąc i klimat wyjazdu. Np. „2500 zł, wrzesień, plaża”.</p>
+    </div>
+    <form id="chatForm">
+      <input id="chatInput" placeholder="Napisz czego szukasz..." />
+      <button>Wyślij</button>
+    </form>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
